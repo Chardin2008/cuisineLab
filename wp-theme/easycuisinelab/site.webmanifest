@@ -1,0 +1,26 @@
+{
+  "name": "Easy Cuisine Lab",
+  "short_name": "ECL",
+  "description": "Imaginer une cuisine plus belle, plus simple et plus inspirante.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF7",
+  "theme_color": "#DCEBDD",
+  "icons": [
+    {
+      "src": "/wp-content/themes/easycuisinelab/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/easycuisinelab/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/easycuisinelab/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

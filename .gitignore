@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+
+# Local/generated QA artifacts.
+qa/
+backups/
+
+# WordPress/runtime files if this repo is copied near an install.
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+
+# Editor and OS noise.
+.idea/
+.vscode/
+*.log

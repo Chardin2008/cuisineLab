@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Easy Cuisine Lab">
+  <rect width="128" height="128" rx="34" fill="#DCEBDD"/>
+  <path d="M29 78c16-25 38-26 50-8 8 12 21 12 31-3" fill="none" stroke="#E86F51" stroke-width="9" stroke-linecap="round"/>
+  <path d="M39 90V39h50v51M52 58h24M52 74h18" fill="none" stroke="#253D34" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="93" cy="42" r="9" fill="#F6A27D"/>
+</svg>
