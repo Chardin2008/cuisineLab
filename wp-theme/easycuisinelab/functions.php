@@ -80,7 +80,7 @@ function ecl_handle_contact(): void
 
     if ($email && $message) {
         $body = "Nom: {$name}\nEmail: {$email}\nTéléphone: {$phone}\nProjet: {$project}\n\nMessage:\n{$message}";
-        wp_mail('chardinpoutcheu@gmail.com', 'Nouvelle demande Easy Cuisine Lab', $body);
+        wp_mail(ecl_contact_recipient_email(), 'Nouvelle demande Easy Cuisine Lab', $body);
     }
 
     wp_safe_redirect(home_url('/#contact'));
@@ -88,6 +88,45 @@ function ecl_handle_contact(): void
 }
 add_action('admin_post_ecl_contact', 'ecl_handle_contact');
 add_action('admin_post_nopriv_ecl_contact', 'ecl_handle_contact');
+
+function ecl_contact_recipient_email(): string
+{
+    $email = sanitize_email((string) get_option('ecl_contact_recipient_email', 'chardinpoutcheu@gmail.com'));
+
+    return $email !== '' ? $email : 'chardinpoutcheu@gmail.com';
+}
+
+function ecl_register_contact_email_setting(): void
+{
+    register_setting('general', 'ecl_contact_recipient_email', [
+        'type' => 'string',
+        'sanitize_callback' => 'sanitize_email',
+        'default' => 'chardinpoutcheu@gmail.com',
+    ]);
+
+    add_settings_field(
+        'ecl_contact_recipient_email',
+        'Email de réception formulaire',
+        'ecl_contact_email_setting_field',
+        'general',
+        'default'
+    );
+}
+add_action('admin_init', 'ecl_register_contact_email_setting');
+
+function ecl_contact_email_setting_field(): void
+{
+    ?>
+    <input
+        name="ecl_contact_recipient_email"
+        type="email"
+        id="ecl_contact_recipient_email"
+        value="<?php echo esc_attr(ecl_contact_recipient_email()); ?>"
+        class="regular-text"
+    >
+    <p class="description">Adresse qui recevra les demandes envoyées depuis le formulaire de contact.</p>
+    <?php
+}
 
 function ecl_nav_items(): array
 {
