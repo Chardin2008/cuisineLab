@@ -5,6 +5,12 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
+if (function_exists('ecl_home_page_admin_content')) {
+    echo apply_filters('the_content', ecl_home_page_admin_content());
+    get_footer();
+    return;
+}
+
 $home_page_id = (int) get_option('page_on_front');
 
 if ($home_page_id <= 0) {

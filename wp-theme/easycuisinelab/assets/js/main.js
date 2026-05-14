@@ -22,16 +22,31 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   if (menuToggle && mobilePanel) {
-    menuToggle.addEventListener('click', () => {
-      const open = mobilePanel.classList.toggle('is-open');
+    const setMenu = (open) => {
+      mobilePanel.classList.toggle('is-open', open);
+      document.body.classList.toggle('has-open-menu', open);
       menuToggle.setAttribute('aria-expanded', String(open));
       menuToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setMenu(!mobilePanel.classList.contains('is-open'));
     });
+
     mobilePanel.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        mobilePanel.classList.remove('is-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+        setMenu(false);
       });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenu(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobilePanel.classList.contains('is-open')) return;
+      if (mobilePanel.contains(event.target) || menuToggle.contains(event.target)) return;
+      setMenu(false);
     });
   }
 
@@ -73,14 +88,35 @@
 
     const setValue = (value) => {
       const pct = Math.max(0, Math.min(100, Number(value)));
-      after.style.width = `${pct}%`;
+      after.style.width = `${100 - pct}%`;
       handle.style.left = `${pct}%`;
       range.value = String(pct);
+    };
+
+    const setFromPointer = (event) => {
+      const rect = compare.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      setValue((x / rect.width) * 100);
     };
 
     syncWidth();
     setValue(range.value);
     range.addEventListener('input', (event) => setValue(event.target.value));
+    compare.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      compare.setPointerCapture(event.pointerId);
+      setFromPointer(event);
+    });
+    compare.addEventListener('pointermove', (event) => {
+      if (!compare.hasPointerCapture(event.pointerId)) return;
+      setFromPointer(event);
+    });
+    compare.addEventListener('pointerup', (event) => {
+      if (compare.hasPointerCapture(event.pointerId)) compare.releasePointerCapture(event.pointerId);
+    });
+    compare.addEventListener('pointercancel', (event) => {
+      if (compare.hasPointerCapture(event.pointerId)) compare.releasePointerCapture(event.pointerId);
+    });
     window.addEventListener('resize', syncWidth, { passive: true });
   });
 
