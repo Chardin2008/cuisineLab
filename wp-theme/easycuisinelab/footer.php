@@ -9,19 +9,19 @@ if (!defined('ABSPATH')) {
     <div class="section-wrap">
         <div class="footer-cta">
             <div class="footer-cta__content">
-                <span class="footer-cta__kicker">Projet cuisine</span>
-                <h2>Prêt à imaginer votre future cuisine ?</h2>
-                <p>Parlez-nous de votre espace, de vos envies et de votre style. Easy Cuisine Lab vous aide à poser une direction claire.</p>
+                <span class="footer-cta__kicker"><?php echo esc_html(ecl_option('footer_cta_kicker')); ?></span>
+                <h2><?php echo esc_html(ecl_option('footer_cta_title')); ?></h2>
+                <p><?php echo esc_html(ecl_option('footer_cta_text')); ?></p>
                 <div class="footer-cta__actions">
-                    <a class="btn btn--coral" href="<?php echo esc_url(home_url('/#contact')); ?>">Demander un devis</a>
-                    <span>Réponse sous 24h ouvrées</span>
+                    <a class="btn btn--coral" href="<?php echo esc_url(ecl_option('footer_cta_button_url')); ?>"><?php echo esc_html(ecl_option('footer_cta_button_label')); ?></a>
+                    <span><?php echo esc_html(ecl_option('footer_cta_note')); ?></span>
                 </div>
             </div>
             <div class="footer-cta__visual" aria-hidden="true">
-                <img src="<?php echo ecl_asset('img/inspiration-soft.jpg'); ?>" alt="">
+                <img src="<?php echo esc_url(ecl_option('footer_cta_image')); ?>" alt="" loading="lazy" decoding="async">
                 <div>
-                    <span>Inspiration cuisine</span>
-                    <strong>Ambiance claire, douce et fonctionnelle</strong>
+                    <span><?php echo esc_html(ecl_option('footer_cta_image_label')); ?></span>
+                    <strong><?php echo esc_html(ecl_option('footer_cta_image_title')); ?></strong>
                 </div>
             </div>
         </div>
@@ -29,37 +29,35 @@ if (!defined('ABSPATH')) {
     <div class="section-wrap site-footer__grid">
         <div class="site-footer__brand">
             <?php echo ecl_logo_markup('footer'); ?>
-            <p>Des cuisines pensées avec plus de style, plus de simplicité et plus d’inspiration.</p>
+            <p><?php echo esc_html(ecl_option('footer_brand_text')); ?></p>
         </div>
         <nav aria-label="Navigation footer">
-            <strong>Explorer</strong>
-            <?php foreach (ecl_nav_items() as $item) : ?>
-                <a href="<?php echo esc_url($item[1]); ?>"><?php echo esc_html($item[0]); ?></a>
-            <?php endforeach; ?>
+            <strong><?php echo esc_html(ecl_option('footer_nav_title')); ?></strong>
+            <?php ecl_menu_markup('footer'); ?>
         </nav>
         <div>
-            <strong>Contact</strong>
-            <a href="mailto:contact@cuisinelab.fr">contact@cuisinelab.fr</a>
-            <a href="tel:+33789000000">+33 7 89 00 00 00</a>
-            <a class="footer-link-strong" href="<?php echo esc_url(home_url('/#contact')); ?>">Envoyer une demande</a>
+            <strong><?php echo esc_html(ecl_option('footer_contact_title')); ?></strong>
+            <a href="mailto:<?php echo esc_attr(ecl_option('footer_email')); ?>"><?php echo esc_html(ecl_option('footer_email')); ?></a>
+            <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', ecl_option('footer_phone'))); ?>"><?php echo esc_html(ecl_option('footer_phone')); ?></a>
+            <a class="footer-link-strong" href="<?php echo esc_url(ecl_option('footer_contact_link_url')); ?>"><?php echo esc_html(ecl_option('footer_contact_link_label')); ?></a>
         </div>
         <div class="site-footer__info">
-            <strong>Informations</strong>
-            <span><b>Adresse</b> 18 rue des Ateliers, 75011 Paris</span>
-            <span><b>Zone</b> France métropolitaine</span>
-            <span><b>Horaires</b> Lun - Ven, 9h - 18h</span>
+            <strong><?php echo esc_html(ecl_option('footer_info_title')); ?></strong>
+            <span><b><?php echo esc_html(ecl_option('footer_address_label')); ?></b> <?php echo esc_html(ecl_option('footer_address')); ?></span>
+            <span><b><?php echo esc_html(ecl_option('footer_zone_label')); ?></b> <?php echo esc_html(ecl_option('footer_zone')); ?></span>
+            <span><b><?php echo esc_html(ecl_option('footer_hours_label')); ?></b> <?php echo esc_html(ecl_option('footer_hours')); ?></span>
             <div class="footer-legal">
-                <a href="<?php echo esc_url(home_url('/mentions-legales/')); ?>">Mentions légales</a>
-                <a href="<?php echo esc_url(home_url('/politique-de-confidentialite/')); ?>">Confidentialité</a>
+                <a href="<?php echo esc_url(ecl_option('footer_legal_1_url')); ?>"><?php echo esc_html(ecl_option('footer_legal_1_label')); ?></a>
+                <a href="<?php echo esc_url(ecl_option('footer_legal_2_url')); ?>"><?php echo esc_html(ecl_option('footer_legal_2_label')); ?></a>
             </div>
         </div>
     </div>
     <div class="section-wrap footer-bottom">
-        <strong>Une cuisine plus claire, plus belle, plus simple à vivre.</strong>
-        <small>&copy; <?php echo esc_html(gmdate('Y')); ?> Easy Cuisine Lab. Tous droits réservés.</small>
+        <strong><?php echo esc_html(ecl_option('footer_bottom_text')); ?></strong>
+        <small>&copy; <?php echo esc_html(gmdate('Y')); ?> <?php echo esc_html(ecl_option('footer_copyright_text')); ?></small>
     </div>
 </footer>
-<a class="floating-cta" href="#contact" aria-label="Aller au formulaire">Projet cuisine</a>
+<a class="floating-cta" href="<?php echo esc_url(ecl_option('floating_cta_url')); ?>" aria-label="Aller au formulaire"><?php echo esc_html(ecl_option('floating_cta_label')); ?></a>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <section class="archive-hero">
     <div class="section-wrap reveal">
-        <p class="section-kicker">Archives</p>
+        <p class="section-kicker"><?php echo esc_html(ecl_option('archive_kicker')); ?></p>
         <h1><?php the_archive_title(); ?></h1>
         <?php the_archive_description('<p>', '</p>'); ?>
     </div>

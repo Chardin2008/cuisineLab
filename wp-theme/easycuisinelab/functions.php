@@ -145,7 +145,7 @@ function ecl_theme_defaults(): array
         'blog_archive_title' => 'Conseils & inspirations',
         'blog_archive_text' => 'Des idées fraîches pour imaginer une cuisine plus belle, plus simple et plus inspirante.',
         'archive_kicker' => 'Archives',
-        'contact_recipient_email' => 'hello@mpc.contact',
+        'contact_recipient_email' => get_option('admin_email'),
     ];
 }
 
@@ -340,7 +340,7 @@ function ecl_register_contact_email_setting(): void
     register_setting('general', 'ecl_contact_recipient_email', [
         'type' => 'string',
         'sanitize_callback' => 'sanitize_email',
-        'default' => 'chardinpoutcheu@gmail.com',
+        'default' => get_option('admin_email'),
     ]);
 
     add_settings_field(

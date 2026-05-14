@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 <section class="archive-hero">
     <div class="section-wrap reveal">
-        <p class="section-kicker">Journal</p>
-        <h1>Conseils & inspirations</h1>
-        <p>Des idées fraîches pour imaginer une cuisine plus belle, plus simple et plus inspirante.</p>
+        <p class="section-kicker"><?php echo esc_html(ecl_option('blog_archive_kicker')); ?></p>
+        <h1><?php echo esc_html(ecl_option('blog_archive_title')); ?></h1>
+        <p><?php echo esc_html(ecl_option('blog_archive_text')); ?></p>
     </div>
 </section>
 <section class="section-pad">
